@@ -19,13 +19,16 @@ public class Members {
     @JoinColumn(name = "groupchat_id")
     private GroupChatsEntity groupChat;
 
+    @Column(name = "usercreate", nullable = false, columnDefinition = "boolean default false")
+    private boolean userCreate = false;
     public Members() {
     }
 
-    public Members(Long memberId, UserEntity user, GroupChatsEntity groupChat) {
+    public Members(Long memberId, UserEntity user, GroupChatsEntity groupChat, boolean userCreate) {
         this.memberId = memberId;
         this.user = user;
         this.groupChat = groupChat;
+        this.userCreate = userCreate;
     }
 
     public Long getMemberId() {
@@ -50,5 +53,13 @@ public class Members {
 
     public void setGroupChat(GroupChatsEntity groupChat) {
         this.groupChat = groupChat;
+    }
+
+    public boolean isUserCreate() {
+        return userCreate;
+    }
+
+    public void setUserCreate(boolean userCreate) {
+        this.userCreate = userCreate;
     }
 }
