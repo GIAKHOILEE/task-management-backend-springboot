@@ -13,7 +13,7 @@ public class UserEntity {
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
     @Column(name = "phonenumber")
     private long phonenumber;
