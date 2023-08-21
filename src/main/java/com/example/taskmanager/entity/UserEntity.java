@@ -1,6 +1,7 @@
 package com.example.taskmanager.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 @Table(name = "users")
@@ -13,6 +14,7 @@ public class UserEntity {
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
+    @NaturalId(mutable = true)
     @Column(name = "email", unique = true)
     private String email;
     @Column(name = "phonenumber")

@@ -1,13 +1,14 @@
 package com.example.taskmanager.service;
 
 import com.example.taskmanager.entity.UserEntity;
+import com.example.taskmanager.registration.RegistrationRequest;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
     List<UserEntity> findAllUser();
-    Optional<UserEntity> findById(Long id);
-    UserEntity saveUser(UserEntity userEntity);
+    UserEntity registerUser(RegistrationRequest request);
+    Optional<UserEntity> findByEmail(String email);
     UserEntity deleteUser(UserEntity userEntity);
 }
