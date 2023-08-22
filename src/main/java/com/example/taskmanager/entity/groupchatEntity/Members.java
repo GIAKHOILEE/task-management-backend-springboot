@@ -2,7 +2,11 @@ package com.example.taskmanager.entity.groupchatEntity;
 
 import com.example.taskmanager.entity.UserEntity;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "members")
 public class Members {
@@ -28,38 +32,6 @@ public class Members {
         this.memberId = memberId;
         this.user = user;
         this.groupChat = groupChat;
-        this.userCreate = userCreate;
-    }
-
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
-
-    public GroupChatsEntity getGroupChat() {
-        return groupChat;
-    }
-
-    public void setGroupChat(GroupChatsEntity groupChat) {
-        this.groupChat = groupChat;
-    }
-
-    public boolean isUserCreate() {
-        return userCreate;
-    }
-
-    public void setUserCreate(boolean userCreate) {
         this.userCreate = userCreate;
     }
 }

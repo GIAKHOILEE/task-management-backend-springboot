@@ -1,7 +1,12 @@
 package com.example.taskmanager.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -13,6 +18,7 @@ public class UserEntity {
     private String firstname;
     @Column(name = "lastname")
     private String lastname;
+    @NaturalId
     @Column(name = "email", unique = true)
     private String email;
     @Column(name = "phonenumber")
@@ -29,54 +35,6 @@ public class UserEntity {
         this.lastname = lastname;
         this.email = email;
         this.phonenumber = phonenumber;
-        this.password = password;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public long getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(long phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
 }
