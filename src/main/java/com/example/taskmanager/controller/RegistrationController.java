@@ -9,11 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@Controller("/register")
+@RequestMapping("/register")
 public class RegistrationController {
     private final UserService userService;
     private final ApplicationEventPublisher applicationEventPublisher;

@@ -11,4 +11,6 @@ public interface UserService {
     UserEntity registerUser(RegistrationRequest request);
     Optional<UserEntity> findByEmail(String email);
     UserEntity deleteUser(UserEntity userEntity);
+
+    void saveUserVerificationToken(UserEntity theUser, String verificationToken);
 }

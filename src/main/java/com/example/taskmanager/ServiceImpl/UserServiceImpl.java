@@ -3,6 +3,8 @@ package com.example.taskmanager.ServiceImpl;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.exception.UserAlreadyExitsException;
 import com.example.taskmanager.registration.RegistrationRequest;
+import com.example.taskmanager.registration.token.VerificationToken;
+import com.example.taskmanager.registration.token.VerificationTokenRepository;
 import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final VerificationTokenRepository tokenRepository;
 
     @Override
     public List<UserEntity> findAllUser() {
@@ -46,5 +49,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity deleteUser(UserEntity userEntity) {
         return null;
+    }
+
+    @Override
+    public void saveUserVerificationToken(UserEntity theUser, String token) {
+        var verificationToken = new VerificationToken(token, theUser);
+        tokenRepository.save(verificationToken);
     }
 }
