@@ -14,7 +14,6 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<UserEntity> findAllUser() {
@@ -27,16 +26,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity saveUser(UserEntity userEntity) {
-//        String encodedPassword = passwordEncoder.encode(userEntity.getPassword());
-//        userEntity.setPassword(encodedPassword);
+    public UserEntity RegistrationUser(UserEntity userEntity) {
         String hashedPassword = BCrypt.hashpw(userEntity.getPassword(), BCrypt.gensalt());
         userEntity.setPassword(hashedPassword);
         return userRepository.save(userEntity);
     }
 
     @Override
-    public UserEntity deleteUser(UserEntity userEntity) {
-        return null;
+    public boolean emailExistsInDatabase(String email) {
+        Optional<UserEntity> userEntity = userRepository.findByEmail(email);
+        return userEntity.isPresent();
     }
+
+
 }
