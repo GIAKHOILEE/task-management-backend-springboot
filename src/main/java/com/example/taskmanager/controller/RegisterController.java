@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
+@CrossOrigin
 @RestController
 @RequestMapping("/register")
 @RequiredArgsConstructor
@@ -25,7 +28,8 @@ public class RegisterController {
     }
 
     @PostMapping("/done")
-    public UserEntity RegistrationUser(@RequestBody UserEntity userEntity) {
-        return userService.RegistrationUser(userEntity);
+    public ResponseEntity<?> RegistrationUser(@RequestBody UserEntity userEntity) {
+        userService.RegistrationUser(userEntity);
+        return ResponseEntity.ok(Collections.singletonMap("ok", true));
     }
 }

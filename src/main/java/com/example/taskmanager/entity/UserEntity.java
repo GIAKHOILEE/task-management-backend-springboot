@@ -21,20 +21,17 @@ public class UserEntity {
     @NaturalId
     @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "phonenumber")
-    private long phonenumber;
     @Column(name = "password")
     private String password;
 
     public UserEntity() {
     }
 
-    public UserEntity(long userId, String firstname, String lastname, String email, long phonenumber, String password) {
+    public UserEntity(long userId, String firstname, String lastname, String email, String password) {
         this.userId = userId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
-        this.phonenumber = phonenumber;
         this.password = password;
     }
 }
