@@ -1,4 +1,4 @@
-package com.example.taskmanager.DTO;
+package com.example.taskmanager.DTO.requestDTO;
 
 import lombok.Getter;
 import lombok.Setter;

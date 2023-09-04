@@ -8,6 +8,9 @@ import java.util.Optional;
 public interface UserService {
     List<UserEntity> findAllUser();
     Optional<UserEntity> findById(Long id);
+    Optional<UserEntity> findByEmail(String email);
     UserEntity RegistrationUser(UserEntity userEntity);
     boolean emailExistsInDatabase(String email);
+    boolean checkUserLogin(String email, String password);
+
 }
