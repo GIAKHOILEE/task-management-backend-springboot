@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<UserEntity> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
     public UserEntity RegistrationUser(UserEntity userEntity) {
         String hashedPassword = BCrypt.hashpw(userEntity.getPassword(), BCrypt.gensalt());
         userEntity.setPassword(hashedPassword);
@@ -36,6 +41,17 @@ public class UserServiceImpl implements UserService {
     public boolean emailExistsInDatabase(String email) {
         Optional<UserEntity> userEntity = userRepository.findByEmail(email);
         return userEntity.isPresent();
+    }
+
+    @Override
+    public boolean checkUserLogin(String email, String password) {
+        Optional<UserEntity> userEntityOpt  = userRepository.findByEmail(email);
+        // Kiểm tra xem Optional có chứa giá trị không
+        if (userEntityOpt.isPresent()) {
+            UserEntity userEntity = userEntityOpt.get();
+            return BCrypt.checkpw(password, userEntity.getPassword());
+        }
+        return false;
     }
 
 
