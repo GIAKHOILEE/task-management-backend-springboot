@@ -46,12 +46,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkUserLogin(String email, String password) {
         Optional<UserEntity> userEntityOpt  = userRepository.findByEmail(email);
-        // Kiểm tra xem Optional có chứa giá trị không
         if (userEntityOpt.isPresent()) {
             UserEntity userEntity = userEntityOpt.get();
             return BCrypt.checkpw(password, userEntity.getPassword());
         }
         return false;
+    }
+
+    @Override
+    public UserEntity saveOrUpdate(UserEntity user) {
+        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(hashedPassword);
+        return userRepository.save(user);
     }
 
 
