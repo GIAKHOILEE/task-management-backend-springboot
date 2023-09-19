@@ -20,11 +20,19 @@ public class JwtTokenService {
     // Thời gian hết hạn của JWT (đây là 5 giờ)
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
-    public String generateToken(String username) {
+    public String generateToken(String email, String firstname, String lastname, String avatar, Long phone) {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder().setClaims(claims).setSubject(username)
+        claims.put("email", email);
+        claims.put("firstname", firstname);
+        claims.put("lastname", lastname);
+        claims.put("avatar", avatar);
+        claims.put("phone", phone);
+
+        return Jwts.builder()
+                .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
     }
 }

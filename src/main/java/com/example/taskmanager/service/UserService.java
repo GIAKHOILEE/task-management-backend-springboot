@@ -12,5 +12,5 @@ public interface UserService {
     UserEntity RegistrationUser(UserEntity userEntity);
     boolean emailExistsInDatabase(String email);
     boolean checkUserLogin(String email, String password);
-
+    UserEntity saveOrUpdate(UserEntity user);
 }

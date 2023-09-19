@@ -33,11 +33,10 @@ public class LoginController {
 
             if (BCrypt.checkpw(loginRequest.getPassword(), userEntity.getPassword())) {
                 // Nếu password hợp lệ
-                String token = jwtTokenService.generateToken(loginRequest.getEmail());
+                String token = jwtTokenService.generateToken(userEntity.getEmail(), userEntity.getFirstname(), userEntity.getLastname(), userEntity.getAvatar(), userEntity.getPhone());
                 return ResponseEntity.ok(new TokenResponseDTO(token));
             }
         }
-        // Nếu email hoặc password không hợp lệ
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
     }
 }

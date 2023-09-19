@@ -21,17 +21,32 @@ public class UserEntity {
     @NaturalId
     @Column(name = "email", unique = true)
     private String email;
+    @Column(name = "phone")
+    private Long phone;
     @Column(name = "password")
     private String password;
+    @Column(name = "avatar")
+    private String avatar;
 
     public UserEntity() {
     }
 
-    public UserEntity(long userId, String firstname, String lastname, String email, String password) {
+    public UserEntity(long userId, String firstname, String lastname, String email, String password, String avatar) {
         this.userId = userId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
+        this.avatar = avatar;
+    }
+
+    public UserEntity(long userId, String firstname, String lastname, String email, Long phone, String password, String avatar) {
+        this.userId = userId;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.avatar = avatar;
     }
 }
