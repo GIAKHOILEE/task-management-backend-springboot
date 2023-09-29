@@ -1,4 +1,4 @@
-package com.example.taskmanager.DTO.responseDTO;
+package com.example.taskmanager.DTO.tokenReponseDTO;
 
 import lombok.Getter;
 import lombok.Setter;
