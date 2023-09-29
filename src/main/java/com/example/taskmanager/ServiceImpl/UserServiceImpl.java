@@ -1,5 +1,6 @@
 package com.example.taskmanager.ServiceImpl;
 
+import com.example.taskmanager.DTO.UserUpdateRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.service.UserService;
@@ -54,10 +55,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity saveOrUpdate(UserEntity user) {
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
-        user.setPassword(hashedPassword);
+    public UserEntity saveOrUpdate(UserEntity user, UserUpdateRequestDTO updateRequestDTO) {
+
+        if (updateRequestDTO.getFirstname() != null) {
+            user.setFirstname(updateRequestDTO.getFirstname());
+        }
+        if (updateRequestDTO.getLastname() != null) {
+            user.setLastname(updateRequestDTO.getLastname());
+        }
+        if (updateRequestDTO.getPassword() != null) {
+            String hashedPassword = BCrypt.hashpw(updateRequestDTO.getPassword(), BCrypt.gensalt());
+            user.setPassword(hashedPassword);
+        }
+        if (updateRequestDTO.getPhone() != null) {
+            user.setPhone(updateRequestDTO.getPhone());
+        }
+        if (updateRequestDTO.getAvatar() != null) {
+            user.setAvatar(updateRequestDTO.getAvatar());
+        }
         return userRepository.save(user);
+
     }
 
 

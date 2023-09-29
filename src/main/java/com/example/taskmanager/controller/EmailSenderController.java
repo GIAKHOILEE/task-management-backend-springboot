@@ -1,6 +1,6 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.DTO.requestDTO.EmailRequestDTO;
+import com.example.taskmanager.DTO.authRequestDTO.EmailRequestDTO;
 import com.example.taskmanager.ServiceImpl.EmailSenderService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.DTO.requestDTO.EmailRequestDTO;
+import com.example.taskmanager.DTO.authRequestDTO.EmailRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.service.UserService;
 import lombok.RequiredArgsConstructor;

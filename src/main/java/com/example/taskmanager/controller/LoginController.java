@@ -1,7 +1,7 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.DTO.requestDTO.LoginRequestDTO;
-import com.example.taskmanager.DTO.responseDTO.TokenResponseDTO;
+import com.example.taskmanager.DTO.authRequestDTO.LoginRequestDTO;
+import com.example.taskmanager.DTO.tokenReponseDTO.TokenResponseDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.service.JwtTokenService;
 import com.example.taskmanager.service.UserService;

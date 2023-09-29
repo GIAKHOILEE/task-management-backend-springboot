@@ -1,13 +1,11 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.DTO.requestDTO.EmailRequestDTO;
-import com.example.taskmanager.DTO.requestDTO.UserUpdateRequestDTO;
+import com.example.taskmanager.DTO.authRequestDTO.EmailRequestDTO;
+import com.example.taskmanager.DTO.UserUpdateRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,25 +55,16 @@ public class UserController {
     }
 
 
-    @PutMapping("/update")
+    @PatchMapping("/update")
     public ResponseEntity<?> updateUserByEmail(@RequestHeader String email, @RequestBody UserUpdateRequestDTO updateRequest) {
         Optional<UserEntity> existingUser = userService.findByEmail(email);
 
         if (!existingUser.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-//        String hashedPassword = BCrypt.hashpw(userEntity.getPassword(), BCrypt.gensalt());
-//        userEntity.setPassword(hashedPassword);
-        UserEntity userToUpdate = existingUser.get();
-        userToUpdate.setFirstname(updateRequest.getFirstname());
-        userToUpdate.setLastname(updateRequest.getLastname());
-        userToUpdate.setPassword(updateRequest.getPassword());
-        userToUpdate.setPhone(updateRequest.getPhone());
-        userToUpdate.setAvatar(updateRequest.getAvatar());
 
-        userService.saveOrUpdate(userToUpdate);
-
-        return ResponseEntity.ok(userToUpdate);
+        UserEntity updatedUser = userService.saveOrUpdate(existingUser.get(), updateRequest);
+        return ResponseEntity.ok(updatedUser);
     }
 
 }
