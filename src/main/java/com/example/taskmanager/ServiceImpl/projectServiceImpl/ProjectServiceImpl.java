@@ -3,8 +3,10 @@ package com.example.taskmanager.ServiceImpl.projectServiceImpl;
 import com.example.taskmanager.DTO.projectDTO.projectRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.entity.projectEntity.ProjectEntity;
+import com.example.taskmanager.entity.projectEntity.UserProjectEntity;
 import com.example.taskmanager.repository.UserRepository;
 import com.example.taskmanager.repository.projectRepository.ProjectRepository;
+import com.example.taskmanager.repository.projectRepository.UserProjectRepository;
 import com.example.taskmanager.service.projectService.ProjectService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +20,7 @@ import java.util.Optional;
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
-
+    private final UserProjectRepository userProjectRepository;
     @Override
     public ProjectEntity createProject(projectRequestDTO request) {
         UserEntity user = userRepository.findById(request.getOwner())
@@ -71,6 +73,11 @@ public class ProjectServiceImpl implements ProjectService {
         Optional<ProjectEntity> project = projectRepository.findById(projectId);
 
         if (project.isPresent()) {
+            // Xóa tất cả UserProject liên quan
+            List<UserProjectEntity> userProjects = userProjectRepository.findAllByProject_ProjectId(projectId);
+            userProjectRepository.deleteAll(userProjects);
+
+            // Sau đó xóa Project
             projectRepository.delete(project.get());
         } else {
             throw new EntityNotFoundException("No project found with id " + projectId);

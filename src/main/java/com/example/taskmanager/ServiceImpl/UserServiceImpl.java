@@ -3,6 +3,7 @@ package com.example.taskmanager.ServiceImpl;
 import com.example.taskmanager.DTO.UserUpdateRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.repository.UserRepository;
+import com.example.taskmanager.repository.projectRepository.UserProjectRepository;
 import com.example.taskmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
@@ -10,12 +11,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
+    private final UserProjectRepository userProjectRepository;
     @Override
     public List<UserEntity> findAllUser() {
         return userRepository.findAll();
@@ -77,5 +79,22 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    //userProject
+//    @Override
+//    public List<UserEntity> getUsersNotInProject(Long projectId){
+//        return userRepository.findUsersNotInProject(projectId);
+//    }
+    @Override
+    public List<UserEntity> findUsersNotInProject(Long projectId) {
+        List<Long> userIdsInProject = userProjectRepository.findByProject_ProjectId(projectId)
+                .stream()
+                .map(userProject -> userProject.getUser().getUserId())
+                .collect(Collectors.toList());
 
+        if(userIdsInProject.isEmpty()) {
+            return userRepository.findAll();
+        }
+
+        return userRepository.findByUserIdNotIn(userIdsInProject);
+    }
 }

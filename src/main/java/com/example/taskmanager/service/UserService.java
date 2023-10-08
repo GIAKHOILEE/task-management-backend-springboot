@@ -14,4 +14,7 @@ public interface UserService {
     boolean emailExistsInDatabase(String email);
     boolean checkUserLogin(String email, String password);
     UserEntity saveOrUpdate(UserEntity user, UserUpdateRequestDTO updateRequestDTO);
+
+    //userproject
+    List<UserEntity> findUsersNotInProject(Long projectId);
 }

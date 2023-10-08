@@ -67,4 +67,15 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
+//    //userProject
+    @GetMapping("/{projectId}/users-not-in-project")
+    public ResponseEntity<List<UserEntity>> getUsersNotInProject(@PathVariable Long projectId) {
+        try {
+            List<UserEntity> users = userService.findUsersNotInProject(projectId);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
