@@ -18,4 +18,8 @@ public class projectRequestDTO {
     private Date startDate ;
     private Date endDate ;
     private String status ;
+
+    public projectRequestDTO() {
+    }
+
 }

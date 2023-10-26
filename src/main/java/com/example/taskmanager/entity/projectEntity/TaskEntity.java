@@ -19,10 +19,7 @@ public class TaskEntity {
     private long taskId;
     @ManyToOne
     @JoinColumn(name = "project_id", referencedColumnName = "project_id")
-    private ProjectEntity projectId;
-    @ManyToOne
-    @JoinColumn(name = "user_assignee_id", referencedColumnName = "user_id")
-    private UserEntity assignee;
+    private ProjectEntity project;
     @Column(name = "task_name")
     private String taskName;
     @Column(name = "task_description")
@@ -31,6 +28,8 @@ public class TaskEntity {
     private int level;
     @Column(name = "status")
     private String status = "todo";
+    @Column(name = "index")
+    private Integer index;
     @Column(name = "start_date")
     private Date startDate;
     @Column(name = "end_date")
@@ -39,14 +38,14 @@ public class TaskEntity {
     public TaskEntity() {
     }
 
-    public TaskEntity(long taskId, ProjectEntity projectId, UserEntity assignee, String taskName, String taskDescription, int level, String status, Date startDate, Date endDate) {
+    public TaskEntity(long taskId, ProjectEntity project, String taskName, String taskDescription, int level, String status, int index, Date startDate, Date endDate) {
         this.taskId = taskId;
-        this.projectId = projectId;
-        this.assignee = assignee;
+        this.project = project;
         this.taskName = taskName;
         this.taskDescription = taskDescription;
         this.level = level;
         this.status = status;
+        this.index = index;
         this.startDate = startDate;
         this.endDate = endDate;
     }
