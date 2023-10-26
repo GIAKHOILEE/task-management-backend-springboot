@@ -1,10 +1,12 @@
 package com.example.taskmanager.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@AllArgsConstructor
 public class UserUpdateRequestDTO {
     private String firstname;
     private String lastname;
@@ -13,15 +15,5 @@ public class UserUpdateRequestDTO {
     private String password;
     private String avatar;
 
-    public UserUpdateRequestDTO() {
-    }
 
-    public UserUpdateRequestDTO(String firstname, String lastname, String email, Long phone, String password, String avatar) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.avatar = avatar;
-    }
 }

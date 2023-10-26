@@ -7,8 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class UserProjectDTO {
-    private Long userId;
-    private Long projectId;
-    private String role = "member";
+public class TaskAssignmentRequestDTO {
+    private Long taskId;
+    private Long userProjectId;
 }
