@@ -9,4 +9,6 @@ public interface TaskAssignmentRepository extends JpaRepository<TaskAssignmentEn
 
     List<TaskAssignmentEntity> findByTask_Project_ProjectId(Long projectId);
     List<TaskAssignmentEntity> findAllByTask_TaskId(Long taskId);
+    List<TaskAssignmentEntity> findAllByUserProject_UserProjectId(Long userProjectId);
+
 }
