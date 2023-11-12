@@ -2,9 +2,15 @@ package com.example.taskmanager.ServiceImpl;
 
 import com.example.taskmanager.DTO.UserUpdateRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
+import com.example.taskmanager.entity.projectEntity.ProjectEntity;
+import com.example.taskmanager.entity.projectEntity.UserProjectEntity;
 import com.example.taskmanager.repository.UserRepository;
+import com.example.taskmanager.repository.projectRepository.ProjectRepository;
+import com.example.taskmanager.repository.projectRepository.TaskAssignmentRepository;
 import com.example.taskmanager.repository.projectRepository.UserProjectRepository;
 import com.example.taskmanager.service.UserService;
+import com.example.taskmanager.service.projectService.UserProjectService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -18,6 +24,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserProjectRepository userProjectRepository;
+    private final ProjectRepository projectRepository;
+    private final TaskAssignmentRepository taskAssignmentRepository;
+    private final UserProjectService projectService;
     @Override
     public List<UserEntity> findAllUser() {
         return userRepository.findAll();
@@ -77,6 +86,24 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.save(user);
 
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        Optional<UserEntity> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            List<UserProjectEntity> userProjects = userProjectRepository.findByUser_userId(id);
+            for (UserProjectEntity userProject : userProjects) {
+                projectService.deleteUserProjectbyId(userProject.getUserProjectId());
+            }
+//            List<ProjectEntity> projectEntities = projectRepository.findAllByOwner_UserId(id);
+//            projectRepository.deleteAll(projectEntities);
+
+            userRepository.deleteById(id);
+
+        } else {
+            throw new EntityNotFoundException("No project found with id " + id);
+        }
     }
 
     //userProject

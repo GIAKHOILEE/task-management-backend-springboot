@@ -11,4 +11,5 @@ public interface TaskAssignmentService {
 
     List<TaskAssignmentEntity> findTaskAssigmentByTaskId(Long taskId);
     List<TaskAssignmentEntity> getAllAssignmentsByProjectId(Long projectId);
+    List<TaskAssignmentEntity> getAllAssignmentsByUserProjectId(Long userProjectId);
 }

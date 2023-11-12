@@ -53,4 +53,9 @@ public class TaskAssignmentServiceImpl implements TaskAssignmentService {
     public List<TaskAssignmentEntity> getAllAssignmentsByProjectId(Long projectId) {
         return taskAssignmentRepository.findByTask_Project_ProjectId(projectId);
     }
+
+    @Override
+    public List<TaskAssignmentEntity> getAllAssignmentsByUserProjectId(Long userProjectId){
+        return taskAssignmentRepository.findAllByUserProject_UserProjectId(userProjectId);
+    }
 }

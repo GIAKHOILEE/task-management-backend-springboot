@@ -11,4 +11,5 @@ public interface UserProjectService {
     void removeMemberFromProject(UserProjectDTO userProjectDTO);
     List<UserEntity> findUsersByProjectId(Long projectId);
     List<UserProjectEntity> findUserProjectsByProjectId(Long projectId);
+    void deleteUserProjectbyId(Long userProjectId);
 }

@@ -4,6 +4,7 @@ import com.example.taskmanager.DTO.authRequestDTO.EmailRequestDTO;
 import com.example.taskmanager.DTO.UserUpdateRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -65,6 +66,18 @@ public class UserController {
 
         UserEntity updatedUser = userService.saveOrUpdate(existingUser.get(), updateRequest);
         return ResponseEntity.ok(updatedUser);
+    }
+
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+        try {
+            userService.deleteUserById(userId);
+            return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
+        } catch (UnsupportedOperationException e) {
+            return new ResponseEntity<>("Cannot delete the owner of the project", HttpStatus.BAD_REQUEST);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>("No user found with id " + userId, HttpStatus.NOT_FOUND);
+        }
     }
 
 //    //userProject
