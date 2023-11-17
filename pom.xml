@@ -87,6 +87,18 @@
 			<artifactId>java-jwt</artifactId>
 			<version>3.18.0</version>
 		</dependency>
+
+		<!--web socket -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		<!--socket io -->
+		<dependency>
+			<groupId>com.corundumstudio.socketio</groupId>
+			<artifactId>netty-socketio</artifactId>
+			<version>1.7.17</version>
+		</dependency>
 	</dependencies>
 
 	<build>
