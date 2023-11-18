@@ -94,6 +94,10 @@ public class UserServiceImpl implements UserService {
         if (user.isPresent()) {
             List<UserProjectEntity> userProjects = userProjectRepository.findByUser_userId(id);
             for (UserProjectEntity userProject : userProjects) {
+                if ("owner".equals(userProject.getRole())) {
+                    throw new IllegalStateException("Cannot delete user with role 'owner' in project");
+                }
+
                 projectService.deleteUserProjectbyId(userProject.getUserProjectId());
             }
 //            List<ProjectEntity> projectEntities = projectRepository.findAllByOwner_UserId(id);
