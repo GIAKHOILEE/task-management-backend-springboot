@@ -24,8 +24,8 @@ public class EmailSenderController {
         verificationCodes.put(emailRequestDTO.getEmail(), verificationCode);
 
         senderService.sendSimpleEmail(emailRequestDTO.getEmail(),
-                "Your verification code is: " + verificationCode,
-                "Verification Code");
+                "Mã xác nhận email của bạn là: " + verificationCode,
+                "Mã xác nhận email của bạn là "+ verificationCode +" vui lòng không chia sẻ cho bất kì ai");
 
         return ResponseEntity.ok("Email with verification code sent successfully! "+ verificationCode);
     }

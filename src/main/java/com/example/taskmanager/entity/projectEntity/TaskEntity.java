@@ -28,8 +28,8 @@ public class TaskEntity {
     private int level;
     @Column(name = "status")
     private String status = "todo";
-    @Column(name = "index")
-    private Integer index;
+//    @Column(name = "index")
+//    private Integer index;
     @Column(name = "start_date")
     private Date startDate;
     @Column(name = "end_date")
@@ -45,7 +45,7 @@ public class TaskEntity {
         this.taskDescription = taskDescription;
         this.level = level;
         this.status = status;
-        this.index = index;
+//        this.index = index;
         this.startDate = startDate;
         this.endDate = endDate;
     }

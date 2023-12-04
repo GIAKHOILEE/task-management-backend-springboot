@@ -47,4 +47,11 @@ public class ProjectController {
             return new ResponseEntity<>("An error occurred while deleting the project", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/getProjectByUserId/{userId}")
+    public ResponseEntity<List<ProjectEntity>> getProjectsByUserId(@PathVariable long userId) {
+        List<ProjectEntity> projects = projectService.getProjectsByUserId(userId);
+        return ResponseEntity.ok(projects);
+    }
+
 }

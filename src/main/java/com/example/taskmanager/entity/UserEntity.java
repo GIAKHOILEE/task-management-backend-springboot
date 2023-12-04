@@ -27,6 +27,8 @@ public class UserEntity {
     private String password;
     @Column(name = "avatar")
     private String avatar;
+    @Column(name = "role")
+    private String role = "employee";
 
     public UserEntity() {
     }
