@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -90,4 +91,12 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
+    @Override
+    public List<ProjectEntity> getProjectsByUserId(Long userId) {
+        List<UserProjectEntity> userProjects = userProjectRepository.findByUserUserId(userId);
+        List<ProjectEntity> projects = userProjects.stream()
+                .map(UserProjectEntity::getProject)
+                .collect(Collectors.toList());
+        return projects;
+    }
 }

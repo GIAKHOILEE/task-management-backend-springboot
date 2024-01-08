@@ -51,9 +51,9 @@ public class TaskServiceImpl implements TaskService {
         if (request.getStatus() != null) {
             existingTask.setStatus(request.getStatus());
         }
-        if (request.getIndex() != null) {
-            existingTask.setIndex(request.getIndex());
-        }
+//        if (request.getIndex() != null) {
+//            existingTask.setIndex(request.getIndex());
+//        }
         if (request.getStartDate() != null) {
             existingTask.setStartDate(request.getStartDate());
         }
