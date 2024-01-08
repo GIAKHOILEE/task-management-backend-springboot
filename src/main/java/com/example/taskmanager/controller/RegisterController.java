@@ -1,12 +1,15 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.DTO.EmailRequestDTO;
+import com.example.taskmanager.DTO.authRequestDTO.EmailRequestDTO;
 import com.example.taskmanager.entity.UserEntity;
 import com.example.taskmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
+@CrossOrigin
 @RestController
 @RequestMapping("/register")
 @RequiredArgsConstructor
@@ -25,7 +28,8 @@ public class RegisterController {
     }
 
     @PostMapping("/done")
-    public UserEntity RegistrationUser(@RequestBody UserEntity userEntity) {
-        return userService.RegistrationUser(userEntity);
+    public ResponseEntity<?> RegistrationUser(@RequestBody UserEntity userEntity) {
+        userService.RegistrationUser(userEntity);
+        return ResponseEntity.ok(Collections.singletonMap("ok", true));
     }
 }

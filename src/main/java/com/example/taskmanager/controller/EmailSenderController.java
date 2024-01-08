@@ -1,18 +1,15 @@
 package com.example.taskmanager.controller;
 
-import com.example.taskmanager.DTO.EmailRequestDTO;
+import com.example.taskmanager.DTO.authRequestDTO.EmailRequestDTO;
 import com.example.taskmanager.ServiceImpl.EmailSenderService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/sendmail")
 @RequiredArgsConstructor
@@ -27,8 +24,8 @@ public class EmailSenderController {
         verificationCodes.put(emailRequestDTO.getEmail(), verificationCode);
 
         senderService.sendSimpleEmail(emailRequestDTO.getEmail(),
-                "Your verification code is: " + verificationCode,
-                "Verification Code");
+                "Mã xác nhận email của bạn là: " + verificationCode,
+                "Mã xác nhận email của bạn là "+ verificationCode +" vui lòng không chia sẻ cho bất kì ai");
 
         return ResponseEntity.ok("Email with verification code sent successfully! "+ verificationCode);
     }
